@@ -10,7 +10,7 @@ const ContactList = () => {
 
 	useEffect(() => {
 		actions.getContacts();
-	}, []);
+	}, [actions]);
 
 	return (
 

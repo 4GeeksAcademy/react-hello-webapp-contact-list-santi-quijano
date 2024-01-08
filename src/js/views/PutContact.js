@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-
+import { Link } from 'react-router-dom';
+import { Context } from '../store/appContext';
 const PutContact = ({ contact_id }) => {
 
   const { store, actions } = useContext(Context);
@@ -31,7 +32,7 @@ const PutContact = ({ contact_id }) => {
 
   return (
     <div className="container mt-10">
-      <h1 className="text-center">Add contact</h1>
+      <h1 className="text-center">Edit Contact</h1>
       <form onSubmit={handleUpdateOfContact}>
         <div className="mb-2">
           <p>Full name</p>

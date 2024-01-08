@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 
 export const ContactCard = ({ contact }) => {
@@ -13,6 +14,12 @@ export const ContactCard = ({ contact }) => {
             <p className="street-adress contact-detail text-muted"><i className="fa-solid fa-location-dot"></i>&nbsp;{contact.address}</p>
             <p className="contact-number contact-detail text-muted"><i className="fa-solid fa-phone"></i>&nbsp;{contact.phone}</p>
             <p className="email-direction contact-detail text-muted"><i className="fa-solid fa-envelope"></i>&nbsp;{contact.email}</p>
+            <div>
+              <Link to={`/put-contact/${contact.id}`}>
+                <i className="btn btn-sm btn-outline-secondary fa-solid fa-pencil fa-fw"></i>
+              </Link>
+            </div>
+
           </div>
         </div>
       </div>
