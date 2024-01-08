@@ -89,12 +89,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			putContact: async (full_name, address, email, phone, contact_id) => {
+				console.log("Updating contact:", contact_id, full_name, email, address, phone);
 				try {
-					const response = await fetch(apiUrl + `${contact_id}`, {
+					const response = await fetch(url + `/${contact_id}`, {
 						method: "PUT",
-						headers: {
-							"Content-Type": "application/json",
-						},
 						body: JSON.stringify({
 							full_name: full_name,
 							address: address,
@@ -102,6 +100,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 							email: email,
 							agenda_slug: "my_own_agenda"
 						}),
+						headers: {
+							"Content-Type": "application/json",
+						},
 					});
 					if (response.ok) {
 						console.log("Contact successfully updated!");

@@ -15,7 +15,7 @@ const PutContact = ({ contact_id }) => {
 
   useEffect(() => {
     handleContactInfo();
-  }, [id])
+  }, [])
 
   const handleContactInfo = async () => {
     try {
@@ -34,8 +34,8 @@ const PutContact = ({ contact_id }) => {
   const handleUpdateOfContact = (e) => {
     e.preventDefault();
     actions.getContacts();
-    actions.putContact(contact_id, full_name, address, phone, email);
-    window.location.href = "/";
+    actions.putContact(contact_id, full_name, address, email, phone);
+    // window.location.href = "/";
   };
 
 
