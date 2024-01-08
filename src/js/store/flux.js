@@ -88,7 +88,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error)
 				}
 			},
-			putContact: async (full_name, address, phone, email, contact_id) => {
+			putContact: async (full_name, address, email, phone, contact_id) => {
 				try {
 					const response = await fetch(apiUrl + `${contact_id}`, {
 						method: "PUT",
@@ -107,6 +107,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log("Contact successfully updated!");
 						const actions = getActions();
 						actions.getContacts();
+					} else {
+						console.error("Failed to update contact. Server response:", response.status)
+						const body = await response.json();
+						console.error("Server response body:", body)
 					}
 				} catch (error) {
 					console.error("There was an error in your request:", error);

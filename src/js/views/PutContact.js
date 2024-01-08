@@ -1,32 +1,41 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Context } from '../store/appContext';
+
+
 const PutContact = ({ contact_id }) => {
 
   const { store, actions } = useContext(Context);
+  const { id } = useParams();
 
   const [full_name, setFull_name] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
 
+  useEffect(() => {
+    handleContactInfo();
+  }, [id])
+
+  const handleContactInfo = async () => {
+    try {
+
+      const getAContact = await actions.getContact(id);
+
+      setFull_name(getAContact.full_name || "")
+      setAddress(getAContact.address || "")
+      setPhone(getAContact.phone || "")
+      setEmail(getAContact.email || "")
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
   const handleUpdateOfContact = (e) => {
     e.preventDefault();
     actions.getContacts();
     actions.putContact(contact_id, full_name, address, phone, email);
-  }
-
-  useEffect(() => {
-    handleContactInfo();
-  })
-
-  const handleContactInfo = async () => {
-    const getAContact = await actions.getContact(contact_id);
-
-    setFull_name(getAContact.full_name)
-    setAddress(getAContact.address)
-    setPhone(getAContact.phone)
-    setEmail(getAContact.email)
+    window.location.href = "/";
   };
 
 
@@ -44,7 +53,7 @@ const PutContact = ({ contact_id }) => {
         </div>
         <div className="mb-2">
           <p>Phone</p>
-          <input type="tel" className="form-control" id="inputPhone" placeholder="Enter phone" onChange={(e) => setPhone(e.target.value)} />
+          <input type="tel" className="form-control" id="inputPhone" placeholder="Enter phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
         </div>
         <div className="mb-2">
           <p>Address</p>
