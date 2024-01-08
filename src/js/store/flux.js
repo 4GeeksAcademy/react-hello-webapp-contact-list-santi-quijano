@@ -77,9 +77,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify({
 							full_name: full_name,
 							address: address,
+							agenda_slug: "my_own_agenda",
 							phone: phone,
 							email: email,
-							agenda_slug: "my_own_agenda"
 						}),
 						headers: {
 							"Content-Type": "application/json",

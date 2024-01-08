@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Context } from '../store/appContext';
 
 
-const PutContact = ({ contact_id }) => {
+const PutContact = () => {
 
   const { store, actions } = useContext(Context);
   const { id } = useParams();
@@ -15,17 +15,21 @@ const PutContact = ({ contact_id }) => {
 
   useEffect(() => {
     handleContactInfo();
-  }, []);
+  }, [id]);
 
   const handleContactInfo = async () => {
     try {
 
       const getAContact = await actions.getContact(id);
+      if (getAContact && typeof getAContact === 'object') {
 
-      setFull_name(getAContact.full_name)
-      setAddress(getAContact.address)
-      setPhone(getAContact.phone)
-      setEmail(getAContact.email)
+        setFull_name(getAContact.full_name || "")
+        setAddress(getAContact.address || "")
+        setPhone(getAContact.phone || "")
+        setEmail(getAContact.email || "")
+      } else {
+        console.error("Invalid data received.")
+      }
     } catch (error) {
       console.log(error)
     }
@@ -34,8 +38,8 @@ const PutContact = ({ contact_id }) => {
   const handleUpdateOfContact = async (e) => {
     e.preventDefault();
     try {
-      await actions.putContact(contact_id, full_name, address, email, phone);
-      actions.getContacts();
+      await actions.putContact(id, full_name, address, email, phone);
+      await actions.getContacts();
     } catch (error) {
       console.error("Error updating contact:", error)
     }
