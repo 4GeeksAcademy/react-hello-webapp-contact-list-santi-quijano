@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Context } from '../store/appContext';
 
 
 const PutContact = () => {
 
+  const navigate = useNavigate();
   const { store, actions } = useContext(Context);
   const { id } = useParams();
 
@@ -40,6 +41,7 @@ const PutContact = () => {
     try {
       await actions.putContact(id, full_name, address, email, phone);
       await actions.getContacts();
+      navigate("/")
     } catch (error) {
       console.error("Error updating contact:", error)
     }

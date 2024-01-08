@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '../store/appContext';
 import "../../styles/PostContact.css";
 
 const PostContact = () => {
   const { store, actions } = useContext(Context);
+  const navigate = useNavigate();
 
   const [full_name, setFull_name] = useState("");
   const [address, setAddress] = useState("");
@@ -15,6 +16,7 @@ const PostContact = () => {
     e.preventDefault();
     actions.getContacts();
     actions.postContact(full_name, address, phone, email);
+    navigate("/")
   }
 
   return (
