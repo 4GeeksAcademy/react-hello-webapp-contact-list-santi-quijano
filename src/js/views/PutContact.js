@@ -13,6 +13,23 @@ const PutContact = ({ contact_id }) => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
 
+  useEffect(() => {
+    handleContactInfo();
+  }, []);
+
+  const handleContactInfo = async () => {
+    try {
+
+      const getAContact = await actions.getContact(id);
+
+      setFull_name(getAContact.full_name)
+      setAddress(getAContact.address)
+      setPhone(getAContact.phone)
+      setEmail(getAContact.email)
+    } catch (error) {
+      console.log(error)
+    }
+  };
 
   const handleUpdateOfContact = async (e) => {
     e.preventDefault();
@@ -24,32 +41,9 @@ const PutContact = ({ contact_id }) => {
     }
     // window.location.href = "/";
   };
-
-
-  useEffect(() => {
-    handleContactInfo();
-  }, []);
-
-  const handleContactInfo = async () => {
-    try {
-
-      const getAContact = await actions.getContact(id);
-
-      setFull_name(getAContact.full_name || "")
-      setAddress(getAContact.address || "")
-      setPhone(getAContact.phone || "")
-      setEmail(getAContact.email || "")
-    } catch (error) {
-      console.log(error)
-    }
-  };
-
-
-
-
   return (
-    <div className="container mt-10">
-      <h1 className="text-center">Edit Contact</h1>
+    <div className="put-contact-container container mt-10">
+      <h1 className="text-center mb-4">Edit Contact</h1>
       <form onSubmit={handleUpdateOfContact}>
         <div className="mb-2">
           <p>Full name</p>
@@ -70,7 +64,7 @@ const PutContact = ({ contact_id }) => {
         <button type="submit" className="btn btn-primary w-100">Save</button>
       </form>
       <br />
-      <Link to="/"><button type="submit" className="btn btn-primary w-100">Get back to contacts</button></Link>
+      <Link to="/"><button type="submit" className="btn btn-primary w-100 mt-3">Get back to contacts</button></Link>
     </div>
   )
 }

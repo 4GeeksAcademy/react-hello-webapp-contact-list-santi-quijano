@@ -69,7 +69,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error)
 				}
 			},
-			putContact: async (full_name, address, email, phone, contact_id) => {
+			putContact: async (contact_id, full_name, address, email, phone) => {
 				console.log("Updating contact:", contact_id, full_name, email, address, phone);
 				try {
 					const response = await fetch(apiUrl + `${contact_id}`, {

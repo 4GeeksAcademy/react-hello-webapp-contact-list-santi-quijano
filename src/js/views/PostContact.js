@@ -18,8 +18,8 @@ const PostContact = () => {
   }
 
   return (
-    <div className="container mt-10">
-      <h1 className="text-center">Add contact</h1>
+    <div className="post-contact-container container mt-10">
+      <h2 className="text-center mb-4">Add Contact</h2>
       <form onSubmit={handleNewContact}>
         <div className="mb-2">
           <p>Full name</p>
@@ -40,7 +40,7 @@ const PostContact = () => {
         <button type="submit" className="btn btn-primary w-100">Save</button>
       </form>
       <br />
-      <Link to="/"><button type="submit" className="btn btn-primary w-100">Get back to contacts</button></Link>
+      <Link to="/"><button type="submit" className="btn btn-secondary w-100 mt-3">Get back to contacts</button></Link>
 
     </div>
   )
