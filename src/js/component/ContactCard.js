@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
-
+import { Context } from '../store/appContext'
 
 export const ContactCard = ({ contact }) => {
+
+  const { store, actions } = useContext(Context);
 
   return (
     <div>
@@ -14,12 +16,17 @@ export const ContactCard = ({ contact }) => {
             <p className="street-adress contact-detail text-muted"><i className="fa-solid fa-location-dot"></i>&nbsp;{contact.address}</p>
             <p className="contact-number contact-detail text-muted"><i className="fa-solid fa-phone"></i>&nbsp;{contact.phone}</p>
             <p className="email-direction contact-detail text-muted"><i className="fa-solid fa-envelope"></i>&nbsp;{contact.email}</p>
-            <div>
+            <div className='d-flex justify-content'>
               <Link to={`/put-contact/${contact.id}`}>
                 <i className="btn btn-sm btn-outline-secondary fa-solid fa-pencil fa-fw"></i>
               </Link>
             </div>
-
+            <i className="fa-solid fa-trash fa-fw btn btn-sm btn-outline-secondary text-danger" onClick={() => {
+              if (window.confirm("Are you sure you wanna delete this contact?")) {
+                actions.deleteContact(contact.id);
+                window.location.reload()
+              }
+            }}></i>
           </div>
         </div>
       </div>

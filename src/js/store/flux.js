@@ -51,25 +51,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-
-			deleteContact: async (contact_id) => {
-				try {
-					const response = await fetch(url + `${contact_id}`, {
-						method: "DELETE",
-						headers: { "Content-Type": "application/json" }
-					});
-					if (response.ok) {
-						const actions = getActions();
-						actions.getContacts()
-						console.log("Contact successfully deleted!");
-					} else {
-						console.error("There was an error while deleting a contact, try again:", response.status);
-					}
-				} catch (error) {
-					console.error("There was a error in the request, try again:", error)
-
-				}
-			},
 			getContact: async (contact_id) => {
 				try {
 					const response = await fetch(apiUrl + `${contact_id}`, {
@@ -91,7 +72,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			putContact: async (full_name, address, email, phone, contact_id) => {
 				console.log("Updating contact:", contact_id, full_name, email, address, phone);
 				try {
-					const response = await fetch(url + `/${contact_id}`, {
+					const response = await fetch(apiUrl + `${contact_id}`, {
 						method: "PUT",
 						body: JSON.stringify({
 							full_name: full_name,
@@ -116,7 +97,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.error("There was an error in your request:", error);
 				}
-			}
+			},
+			deleteContact: async (contact_id) => {
+				try {
+					const response = await fetch(apiUrl + `${contact_id}`, {
+						method: "DELETE",
+						headers: { "Content-Type": "application/json" }
+					});
+					if (response.ok) {
+						const actions = getActions();
+						actions.getContacts()
+						console.log("Contact successfully deleted!");
+					} else {
+						console.error("There was an error while deleting a contact, try again:", response.status);
+					}
+				} catch (error) {
+					console.error("There was a error in the request, try again:", error)
+
+				}
+			},
 		},
 
 	};
