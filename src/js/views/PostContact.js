@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Context } from '../store/appContext';
 import "../../styles/PostContact.css";
 
@@ -40,6 +41,7 @@ const PostContact = () => {
       </form>
       <br />
       <Link to="/"><button type="submit" className="btn btn-primary w-100">Get back to contacts</button></Link>
+
     </div>
   )
 }
