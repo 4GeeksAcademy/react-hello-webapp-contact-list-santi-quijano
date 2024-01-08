@@ -20,13 +20,15 @@ export const ContactCard = ({ contact }) => {
               <Link to={`/put-contact/${contact.id}`}>
                 <i className="btn btn-sm btn-outline-primary fa-solid fa-pencil fa-fw"></i>
               </Link>
+              &nbsp;
+              <i className="fa-solid fa-trash fa-fw btn btn-sm btn-outline-danger" onClick={() => {
+                if (window.confirm("Are you sure you wanna delete this contact?")) {
+                  actions.deleteContact(contact.id);
+                  window.location.reload()
+                }
+              }}></i>
             </div>
-            <i className="fa-solid fa-trash fa-fw btn btn-sm btn-outline-danger" onClick={() => {
-              if (window.confirm("Are you sure you wanna delete this contact?")) {
-                actions.deleteContact(contact.id);
-                window.location.reload()
-              }
-            }}></i>
+
           </div>
         </div>
       </div>
